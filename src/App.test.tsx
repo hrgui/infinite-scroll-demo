@@ -5,13 +5,13 @@ import App from "./App";
 it("should show an infinite list of projects that can be endlessly scrolled down", async () => {
   render(<App />);
 
-  expect(await screen.findByText(/Project 1/)).toBeVisible();
+  expect(await screen.findByText(/Dog 1/)).toBeVisible();
 
   mockAllIsIntersecting(true);
 
-  expect(await screen.findByText(/Project 6/)).toBeVisible();
+  expect(await screen.findByText(/Dog 6/)).toBeVisible();
 
   mockAllIsIntersecting(true);
 
-  expect(await screen.findByText(/Project 11/)).toBeVisible();
+  expect(await screen.findByText(/Dog 11/)).toBeVisible();
 });

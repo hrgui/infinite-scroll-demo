@@ -7,7 +7,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="container mx-auto">
-        <InfiniteScrollDemo />
+        <div className="max-w-[680px] mx-auto">
+          <InfiniteScrollDemo />
+        </div>
       </div>
     </QueryClientProvider>
   );
