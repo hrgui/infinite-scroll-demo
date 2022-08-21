@@ -3,28 +3,18 @@ import React from "react";
 import { InView } from "react-intersection-observer";
 import Card from "./ui/Card";
 import Spinner from "./ui/Spinner";
-import { faker } from "@faker-js/faker";
 import Skeleton from "./ui/Skeleton";
 
 type Props = {};
 
 const LIMIT = 1000;
-export function getSampleData(pageParam: number) {
+export async function getSampleData(pageParam: number) {
   const cursor = +pageParam || 0;
   const pageSize = 5;
 
-  const data = Array(pageSize)
-    .fill(0)
-    .map((_, i) => {
-      const id = i + cursor;
-      return {
-        name: faker.name.firstName(),
-        description: faker.lorem.paragraph(),
-        thumbnail: `https://placedog.net/100/100?id=${id}`,
-        postImage: `https://placedog.net/600/600?id=${id}`,
-        id,
-      };
-    });
+  const allData = await (await import("~/fixtures/data.json")).default;
+
+  const data = allData.slice(cursor - 1, pageParam + pageSize);
 
   const nextId = cursor < LIMIT ? data[data.length - 1].id + 1 : null;
   const previousId = cursor < -LIMIT ? data[0].id - pageSize : null;
